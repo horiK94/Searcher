@@ -4,8 +4,10 @@
 class Title : public State
 {
 private:
-	const Font font{ FontMethod::MSDF, 48, Typeface::Bold };
-	const String text = U"ウィンドウ宝探し";
+	const Font titleFont{ FontMethod::MSDF, 48, Typeface::Bold };
+	const Font toGameFont{ FontMethod::MSDF, 30 };
+	const String titleText = U"ウィンドウ宝探し";
+	const String toGameText = U"クリックでゲーム開始";
 	const float moveDelay = 5;
 	const float fallDuration = 0.2f;
 	const float fallTime = 0.4f;
