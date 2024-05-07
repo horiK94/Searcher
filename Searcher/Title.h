@@ -13,6 +13,9 @@ private:
 	const float fallTime = 0.4f;
 	Vec2 textMoveVec[8];
 	float passedTime = 0;
+
+	void moveTitleWord(int index, float curentTime);
+	void showClickToGameText(float curentTime);
 public:
 	void Intialize();
 	void Update();
