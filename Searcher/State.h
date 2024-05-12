@@ -7,8 +7,10 @@ class State
 {
 protected:
 	StateController* controller;
+	virtual ~State() {};
 public:
-	virtual void Intialize() {};
-	virtual void Update() {};
+	virtual void Initialize() = 0;
+	virtual void Update() = 0;
+	State(StateController* controller);
 };
 

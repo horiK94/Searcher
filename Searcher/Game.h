@@ -23,7 +23,7 @@ private:
 	void setTheme();
 public:
 	Game(StateController* controller);
-	void Intialize();
-	void Update();
+	void Initialize() override;
+	void Update() override;
 };
 

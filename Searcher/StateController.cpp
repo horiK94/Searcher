@@ -13,7 +13,7 @@ void StateController::ChangeState(GameState state)
 	}
 
 	currentState = state;
-	stateInstance[currentState]->Intialize();
+	stateInstance[currentState]->Initialize();
 }
 
 void StateController::Update()
@@ -29,5 +29,5 @@ StateController::StateController()
 	stateInstance[GAME] = new Game(this);
 
 	//最初だけ明示的に実行する
-	stateInstance[currentState]->Intialize();
+	stateInstance[currentState]->Initialize();
 }

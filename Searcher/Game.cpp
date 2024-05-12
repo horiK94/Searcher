@@ -31,12 +31,11 @@ void Game::setTheme()
 
 }
 
-Game::Game(StateController* ctr)
+Game::Game(StateController* ctr) : State::State(ctr)
 {
-	controller = ctr;
 }
 
-void Game::Intialize()
+void Game::Initialize()
 {
 	Window::SetStyle(WindowStyle::Fixed);
 	setTheme();

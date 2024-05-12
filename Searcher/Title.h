@@ -17,8 +17,8 @@ private:
 	void moveTitleWord(int index, float curentTime);
 	void showClickToGameText(float curentTime);
 public:
-	void Intialize();
-	void Update();
+	void Initialize() override;
+	void Update() override;
 	Title(StateController* controller);
 };
 

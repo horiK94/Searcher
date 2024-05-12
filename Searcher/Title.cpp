@@ -60,7 +60,7 @@ void Title::showClickToGameText(float curentTime)
 	toGameFont(toGameText).drawAt(showPosition);
 }
 
-void Title::Intialize()
+void Title::Initialize()
 {
 	Window::SetStyle(WindowStyle::Sizable);
 	Window::ResizeVirtual(600, 600);
@@ -92,7 +92,6 @@ void Title::Update()
 	passedTime += Scene::DeltaTime();
 }
 
-Title::Title(StateController* ctr)
+Title::Title(StateController* ctr) : State::State(ctr)
 {
-	controller = ctr;
 }
