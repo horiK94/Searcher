@@ -1,5 +1,7 @@
 ﻿#pragma once
 #include "State.h"
+#include "CharacterPutStyleBase.h"
+#include "SquaresPut.h"
 
 class Game : public State
 {
@@ -12,18 +14,37 @@ private:
 	int correctIndex = 0;
 
 	void decideScreenSize();
-	void decideCharacter();
+	void decideUseCharacter();
+	void decidePutInfo();
 
 	const std::vector<String> searchCharacters = {
-	U"😦😲😯😧",
-	U"🐫🐪🐆🐈🐕",
-	U"😘😗😚😙",
+		U"😦😲😯😧",
+		U"🐫🐪🐆🐈🐕",
+		U"😘😗😚😙",
+	};
+	const std::vector<std::vector<int>> characterSize = {
+		{60, 60, 60, 60},
+		{70, 70, 70, 70, 70},
+		{60, 60, 60, 60},
+	};
+	const Vec2 screenSize[5] = {
+	{200, 200},
+	{150, 250},
+	{200, 150},
+	{150, 150},
+	{160, 100},
 	};
 
+	std::vector<std::vector<Texture>> textureCacheList;
+
+	std::vector<Vec2> texturePosList;
+	std::vector<int> textureIndexList;
+	Circle correctCircle;
+
+	void createTexture();
 	void setTheme();
 public:
 	Game(StateController* controller);
 	void Initialize() override;
 	void Update() override;
 };
-

@@ -9,6 +9,6 @@ private:
 	Point purCount;
 public:
 	SquaresPut(String charcter, int _purposeIndex, int dummy, Point purCount);
-	std::vector<Vec2> DecidePosition();
+	std::vector<Vec2> CreatePosition();
 };
 
