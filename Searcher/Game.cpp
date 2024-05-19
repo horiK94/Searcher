@@ -17,7 +17,7 @@ void Game::decideUseCharacter()
 
 void Game::decidePutInfo()
 {
-	CharacterPutStyleBase* putStyle = new SquaresPut(searchCharacters[questionTextIndex], correctIndex, 5, Point{ 3, 3 });
+	CharacterPutStyleBase* putStyle = new SquaresPut(fullScreenSize, searchCharacters[questionTextIndex], correctIndex, 5, Point{ 3, 3 });
 	texturePosList = putStyle->CreatePosition();		//0番目の要素が正解の位置
 
 	//正解のボタンのサイズを設定
@@ -26,7 +26,7 @@ void Game::decidePutInfo()
 
 void Game::setTheme()
 {
-	//decideScreenSize();
+	decideScreenSize();
 	decideUseCharacter();
 	decidePutInfo();
 }
@@ -58,6 +58,10 @@ void Game::createTexture()
 void Game::Initialize()
 {
 	Window::SetStyle(WindowStyle::Fixed);
+	Window::SetToggleFullscreenEnabled(false);		//フルスクリーン切り替えを無効にする
+
+	MonitorInfo programWindow = System::EnumerateMonitors()[System::GetCurrentMonitorIndex()];
+	fullScreenSize = programWindow.fullscreenResolution;
 
 	createTexture();
 	setTheme();

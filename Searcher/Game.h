@@ -28,11 +28,11 @@ private:
 		{60, 60, 60, 60},
 	};
 	const Vec2 screenSize[5] = {
-	{200, 200},
-	{150, 250},
-	{200, 150},
-	{150, 150},
-	{160, 100},
+	{300, 300},
+	{200, 350},
+	{300, 250},
+	{200, 250},
+	{260, 200},
 	};
 
 	std::vector<std::vector<Texture>> textureCacheList;
@@ -43,6 +43,8 @@ private:
 
 	void createTexture();
 	void setTheme();
+
+	Size fullScreenSize = Size{0, 0};
 public:
 	Game(StateController* controller);
 	void Initialize() override;

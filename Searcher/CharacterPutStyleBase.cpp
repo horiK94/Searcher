@@ -1,6 +1,6 @@
 ﻿#include "stdafx.h"
 #include "CharacterPutStyleBase.h"
 
-CharacterPutStyleBase::CharacterPutStyleBase(String charcter, int _purposeIndex) : character(character), purposeIndex(purposeIndex)
+CharacterPutStyleBase::CharacterPutStyleBase(Size fullScreenSize, String charcter, int _purposeIndex) : fullScreenSize(fullScreenSize), character(character), purposeIndex(purposeIndex)
 {
 }

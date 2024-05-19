@@ -3,7 +3,7 @@
 #include "Siv3D.hpp"
 #include <set>
 
-SquaresPut::SquaresPut(String character, int purposeIndex, int dummyCount, Point purCount) : CharacterPutStyleBase::CharacterPutStyleBase(character, purposeIndex)
+SquaresPut::SquaresPut(Size fullScreenSize, String character, int purposeIndex, int dummyCount, Point purCount) : CharacterPutStyleBase::CharacterPutStyleBase(fullScreenSize, character, purposeIndex)
 , dummyCount(dummyCount), purCount(purCount)
 {
 }
@@ -39,7 +39,7 @@ std::vector<Vec2> SquaresPut::CreatePosition()
 		putPoint.push_back(Point{ rand[i].first % purCount.x, rand[i].first / purCount.x });
 	}
 
-	Vec2 screenSize = Scene::Size();
+	Vec2 screenSize = fullScreenSize;
 	//端っこに置かないように(purCount.x + 1, purCount.y + 1)個で分割する
 	Vec2 durationSize = screenSize / Vec2{ purCount.x + 1 , purCount.y + 1 };
 
