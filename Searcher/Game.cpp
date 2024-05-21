@@ -81,6 +81,13 @@ void Game::Update()
 	correctCircle.setPos(texturePosList[0]);
 	if (MouseL.down())
 	{
+		Vec2 mousePos = Cursor::Pos();
+		if(mousePos.x < 0 || mousePos.x > fullScreenSize.x
+			|| mousePos.y < 0 || mousePos.y > fullScreenSize.y)
+		{
+			return;
+		}
+
 		if (correctCircle.leftClicked())
 		{
 			setTheme();
