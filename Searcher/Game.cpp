@@ -26,10 +26,10 @@ void Game::decidePutInfo()
 	//表示する画像を決定
 	textureIndexList = std::vector<int>(texturePosList.size());
 	textureIndexList[0] = correctIndex;
-	for (int i = 1; i < searchCharacters.size(); i++)
+	for (int i = 1; i < textureIndexList.size(); i++)
 	{
 		int dummyIndex = Random() * (searchCharacters[questionTextIndex].size() - 1);
-		if(dummyIndex >= correctIndex)
+		if (dummyIndex >= correctIndex)
 		{
 			dummyIndex++;
 		}
@@ -76,38 +76,59 @@ void Game::Initialize()
 	MonitorInfo programWindow = System::EnumerateMonitors()[System::GetCurrentMonitorIndex()];
 	fullScreenSize = programWindow.fullscreenResolution;
 
+	purposeFont = Font{ 30 };
+
 	createTexture();
 	setTheme();
 }
 
 void Game::Update()
 {
-	Vec2 screenPos = Window::GetPos();
-
-	for (int i = 0; i < texturePosList.size(); ++i)
+	switch (currentState)
 	{
-		Vec2 texturePos = texturePosList[i] - screenPos;
-
-		textureCacheList[questionTextIndex][textureIndexList[i]].drawAt(texturePos);
+	case SHOW_PURPOSE:
+	{
+		purposeFont(U"↓WANTED↓").drawAt(Scene::Center() + Point{0, -60});
+		textureCacheList[questionTextIndex][correctIndex].drawAt(Scene::Center() + Point{0, 15});
+		if (MouseL.down())
+		{
+			currentState = SEARCH;
+		}
 	}
-
-	correctCircle.setPos(texturePosList[0]);
-	if (MouseL.down())
+	break;
+	case SEARCH:
 	{
-		Vec2 mousePos = Cursor::Pos();
-		if (mousePos.x < 0 || mousePos.x > fullScreenSize.x
-			|| mousePos.y < 0 || mousePos.y > fullScreenSize.y)
+		Vec2 screenPos = Window::GetPos();
+
+		for (int i = 0; i < texturePosList.size(); ++i)
 		{
-			return;
+			Vec2 texturePos = texturePosList[i] - screenPos;
+
+			textureCacheList[questionTextIndex][textureIndexList[i]].drawAt(texturePos);
 		}
 
-		if (correctCircle.leftClicked())
+		correctCircle.setPos(texturePosList[0]);
+		if (MouseL.down())
 		{
-			setTheme();
+			Vec2 mousePos = Cursor::Pos();
+			if (mousePos.x < 0 || mousePos.x > fullScreenSize.x
+				|| mousePos.y < 0 || mousePos.y > fullScreenSize.y)
+			{
+				return;
+			}
+
+			if (correctCircle.leftClicked())
+			{
+				setTheme();
+				currentState = SHOW_PURPOSE;
+			}
+			else
+			{
+				Print << U"間違い";
+			}
 		}
-		else
-		{
-			Print << U"間違い";
-		}
+		correctCircle.setPos(texturePosList[0]);
+		break;
+	}
 	}
 }

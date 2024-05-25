@@ -18,14 +18,16 @@ private:
 	void decidePutInfo();
 
 	const std::vector<String> searchCharacters = {
-		U"😦😲😯😧",
-		U"🐫🐪🐆🐈🐕",
-		U"😘😗😚😙",
+		//U"😦😲😯😧",
+		//U"🐫🐪🐆🐈🐕",
+		//U"😘😗😚😙",
+		U"👺🙈"
 	};
 	const std::vector<std::vector<int>> characterSize = {
-		{60, 60, 60, 60},
-		{70, 70, 70, 70, 70},
-		{60, 60, 60, 60},
+		//{60, 60, 60, 60},
+		//{70, 70, 70, 70, 70},
+		//{60, 60, 60, 60},
+		{60, 60},
 	};
 	const Vec2 screenSize[5] = {
 	{300, 300},
@@ -45,6 +47,15 @@ private:
 	void setTheme();
 
 	Size fullScreenSize = Size{0, 0};
+
+	enum eState
+	{
+		SHOW_PURPOSE,
+		SEARCH,
+	};
+	eState currentState = SHOW_PURPOSE;
+
+	Font purposeFont;
 public:
 	Game(StateController* controller);
 	void Initialize() override;
