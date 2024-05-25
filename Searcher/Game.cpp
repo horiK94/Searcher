@@ -22,6 +22,19 @@ void Game::decidePutInfo()
 
 	//正解のボタンのサイズを設定
 	correctCircle = Circle{ texturePosList[0], characterSize[questionTextIndex][correctIndex] };
+
+	//表示する画像を決定
+	textureIndexList = std::vector<int>(texturePosList.size());
+	textureIndexList[0] = correctIndex;
+	for (int i = 1; i < searchCharacters.size(); i++)
+	{
+		int dummyIndex = Random() * (searchCharacters[questionTextIndex].size() - 1);
+		if(dummyIndex >= correctIndex)
+		{
+			dummyIndex++;
+		}
+		textureIndexList[i] = dummyIndex;
+	}
 }
 
 void Game::setTheme()
@@ -75,14 +88,14 @@ void Game::Update()
 	{
 		Vec2 texturePos = texturePosList[i] - screenPos;
 
-		textureCacheList[questionTextIndex][i % textureCacheList[questionTextIndex].size()].drawAt(texturePos);
+		textureCacheList[questionTextIndex][textureIndexList[i]].drawAt(texturePos);
 	}
 
 	correctCircle.setPos(texturePosList[0]);
 	if (MouseL.down())
 	{
 		Vec2 mousePos = Cursor::Pos();
-		if(mousePos.x < 0 || mousePos.x > fullScreenSize.x
+		if (mousePos.x < 0 || mousePos.x > fullScreenSize.x
 			|| mousePos.y < 0 || mousePos.y > fullScreenSize.y)
 		{
 			return;
