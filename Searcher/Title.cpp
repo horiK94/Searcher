@@ -76,7 +76,6 @@ void Title::Initialize()
 void Title::Update()
 {
 	ClearPrint();
-	Print << Cursor::Pos();
 
 	for (unsigned long long i = 0; i < titleText.size(); i++)
 	{

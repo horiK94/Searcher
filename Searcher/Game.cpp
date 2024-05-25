@@ -77,19 +77,29 @@ void Game::Initialize()
 	fullScreenSize = programWindow.fullscreenResolution;
 
 	purposeFont = Font{ 30 };
+	gameStateFont = Font{ 30 };
+	gameStateFont = Font{ 20 };
 
 	createTexture();
 	setTheme();
+
+	remainTime = TIME_LIMIT;
 }
 
 void Game::Update()
 {
+	remainTime -= Scene::DeltaTime();
+
+	ClearPrint();
+	gameStateFont(U"残り: " + U"{:.2f}"_fmt(remainTime) + U", 正: " + Format(correctCount) + U", 誤: " + Format(correctCount)).draw(Point{2, 5});
+
 	switch (currentState)
 	{
 	case SHOW_PURPOSE:
 	{
-		purposeFont(U"↓WANTED↓").drawAt(Scene::Center() + Point{0, -60});
-		textureCacheList[questionTextIndex][correctIndex].drawAt(Scene::Center() + Point{0, 15});
+		purposeFont(U"↓WANTED↓").drawAt(Scene::Center() + Point{ 0, -60 });
+		textureCacheList[questionTextIndex][correctIndex].drawAt(Scene::Center() + Point{ 0, 15 });
+
 		if (MouseL.down())
 		{
 			currentState = SEARCH;
@@ -107,7 +117,7 @@ void Game::Update()
 			textureCacheList[questionTextIndex][textureIndexList[i]].drawAt(texturePos);
 		}
 
-		correctCircle.setPos(texturePosList[0]);
+		correctCircle.setPos(texturePosList[0] - screenPos);
 		if (MouseL.down())
 		{
 			Vec2 mousePos = Cursor::Pos();
@@ -119,15 +129,15 @@ void Game::Update()
 
 			if (correctCircle.leftClicked())
 			{
+				correctCount++;
 				setTheme();
 				currentState = SHOW_PURPOSE;
 			}
 			else
 			{
-				Print << U"間違い";
+				wrongCount++;
 			}
 		}
-		correctCircle.setPos(texturePosList[0]);
 		break;
 	}
 	}

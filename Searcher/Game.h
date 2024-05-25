@@ -9,6 +9,7 @@ private:
 	int correctCount;
 	int wrongCount;
 	const float TIME_LIMIT = 60.0f;
+	float remainTime = 0.0;
 
 	int questionTextIndex = 0;
 	int correctIndex = 0;
@@ -56,6 +57,8 @@ private:
 	eState currentState = SHOW_PURPOSE;
 
 	Font purposeFont;
+	Font gameStateFont;
+
 public:
 	Game(StateController* controller);
 	void Initialize() override;
