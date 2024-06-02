@@ -37,6 +37,15 @@ void Game::decidePutInfo()
 	}
 }
 
+void Game::moveResult()
+{
+	controller->GetGameData().Score = correctCount;
+	controller->GetGameData().CorrectCount = correctCount;
+	controller->GetGameData().WrongCount = wrongCount;
+
+	controller->ChangeState(StateController::RESULT);
+}
+
 void Game::setTheme()
 {
 	decideScreenSize();
@@ -91,7 +100,7 @@ void Game::Update()
 	remainTime -= Scene::DeltaTime();
 
 	ClearPrint();
-	gameStateFont(U"残り: " + U"{:.2f}"_fmt(remainTime) + U", 正: " + Format(correctCount) + U", 誤: " + Format(correctCount)).draw(Point{2, 5});
+	gameStateFont(U"残り: " + U"{0:.2f}, 正: {1}, 誤: {2}"_fmt(remainTime, correctCount, wrongCount)).draw(Point{ 2, 5 });
 
 	switch (currentState)
 	{
@@ -103,6 +112,11 @@ void Game::Update()
 		if (MouseL.down())
 		{
 			currentState = SEARCH;
+		}
+
+		if (remainTime <= 0)
+		{
+			moveResult();
 		}
 	}
 	break;
@@ -138,7 +152,12 @@ void Game::Update()
 				wrongCount++;
 			}
 		}
-		break;
+
+		if (remainTime <= 0)
+		{
+			moveResult();
+		}
 	}
+	break;
 	}
 }

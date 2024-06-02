@@ -8,7 +8,7 @@ class Game : public State
 private:
 	int correctCount;
 	int wrongCount;
-	const float TIME_LIMIT = 60.0f;
+	const float TIME_LIMIT = 2.0f;
 	float remainTime = 0.0;
 
 	int questionTextIndex = 0;
@@ -17,17 +17,18 @@ private:
 	void decideScreenSize();
 	void decideUseCharacter();
 	void decidePutInfo();
+	void moveResult();
 
 	const std::vector<String> searchCharacters = {
-		//U"😦😲😯😧",
-		//U"🐫🐪🐆🐈🐕",
-		//U"😘😗😚😙",
+		U"😦😲😯😧",
+		U"🐫🐪🐆🐈🐕",
+		U"😘😗😚😙",
 		U"👺🙈"
 	};
 	const std::vector<std::vector<int>> characterSize = {
-		//{60, 60, 60, 60},
-		//{70, 70, 70, 70, 70},
-		//{60, 60, 60, 60},
+		{60, 60, 60, 60},
+		{70, 70, 70, 70, 70},
+		{60, 60, 60, 60},
 		{60, 60},
 	};
 	const Vec2 screenSize[5] = {

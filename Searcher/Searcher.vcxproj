@@ -118,6 +118,7 @@
     <ClCompile Include="CharacterPutStyleBase.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Result.cpp" />
     <ClCompile Include="SquaresPut.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="StateController.cpp" />
@@ -333,6 +334,7 @@
   <ItemGroup>
     <ClInclude Include="CharacterPutStyleBase.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Result.h" />
     <ClInclude Include="SquaresPut.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateController.h" />

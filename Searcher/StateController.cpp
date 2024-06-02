@@ -3,6 +3,7 @@
 
 #include "Title.h"
 #include "Game.h"
+#include "Result.h"
 
 void StateController::ChangeState(GameState state)
 {
@@ -27,7 +28,13 @@ StateController::StateController()
 
 	stateInstance[TITLE] = new Title(this);
 	stateInstance[GAME] = new Game(this);
+	stateInstance[RESULT] = new Result(this);
 
 	//最初だけ明示的に実行する
 	stateInstance[currentState]->Initialize();
+}
+
+GameData& StateController::GetGameData()
+{
+	return gameData;
 }
