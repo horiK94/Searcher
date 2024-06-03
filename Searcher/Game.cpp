@@ -39,9 +39,10 @@ void Game::decidePutInfo()
 
 void Game::moveResult()
 {
-	controller->GetGameData().Score = correctCount;
-	controller->GetGameData().CorrectCount = correctCount;
-	controller->GetGameData().WrongCount = wrongCount;
+	auto& gameData = controller->GetGameData();
+	gameData.Score = correctCount;
+	gameData.CorrectCount = correctCount;
+	gameData.WrongCount = wrongCount;
 
 	controller->ChangeState(StateController::RESULT);
 }

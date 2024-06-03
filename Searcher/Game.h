@@ -8,7 +8,7 @@ class Game : public State
 private:
 	int correctCount;
 	int wrongCount;
-	const float TIME_LIMIT = 2.0f;
+	const float TIME_LIMIT = 60.0f;
 	float remainTime = 0.0;
 
 	int questionTextIndex = 0;
